@@ -119,9 +119,9 @@ namespace SinglyLinkedList.Tests
 
             Assert.AreEqual(expected.Length, this.list.Count);
 
-            this.list.RemoveLast();
-            this.list.RemoveLast();
-            this.list.RemoveLast();
+            var element = this.list.RemoveLast();
+            var element1 = this.list.RemoveLast();
+            var element2 = this.list.RemoveLast();
 
             CollectionAssert.AreEqual(expected.Take(expected.Length - 3), this.list);
         }
