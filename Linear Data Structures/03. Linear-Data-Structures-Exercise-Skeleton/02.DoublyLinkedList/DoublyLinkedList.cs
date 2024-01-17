@@ -6,7 +6,29 @@
 
     public class DoublyLinkedList<T> : IAbstractLinkedList<T>
     {
+        public class Node
+        {
+            public T Value { get; set; }
+            public Node Previous { get; set; }
+            public Node Next { get; set; }
+
+            public Node(T value)
+            {
+                this.Value = value;
+                this.Previous = null;
+                this.Next = null;
+            }
+        }
+        public Node Head { get; set; }
+        public Node Tail { get; set; }
         public int Count { get; private set; }
+
+        public DoublyLinkedList()
+        {
+            this.Tail = null;
+            this.Head = null;
+            this.Count = 0;
+        }
 
         public void AddFirst(T item)
         {
