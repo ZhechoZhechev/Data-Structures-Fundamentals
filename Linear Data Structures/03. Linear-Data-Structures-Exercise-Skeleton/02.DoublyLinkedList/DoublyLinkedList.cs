@@ -32,42 +32,112 @@
 
         public void AddFirst(T item)
         {
-            throw new NotImplementedException();
+            Node ElToAdd = new Node(item);
+            if (Count == 0)
+            {
+                this.Head = this.Tail = ElToAdd;
+            }
+            else
+            {
+                Node previousHead = this.Head;
+                this.Head = ElToAdd;
+                previousHead.Previous = this.Head;
+                this.Head.Next = previousHead;
+            }
+            this.Count++;
         }
 
         public void AddLast(T item)
         {
-            throw new NotImplementedException();
+            Node ElToAdd = new Node(item);
+            if (Count == 0)
+            {
+                this.Head = this.Tail = ElToAdd;
+            }
+            else
+            {
+                Node previousTail = this.Tail;
+                this.Tail = ElToAdd;
+                previousTail.Next = this.Tail;
+                this.Tail.Previous = previousTail;
+            }
+            this.Count++;
         }
 
         public T GetFirst()
         {
-            throw new NotImplementedException();
+            this.IfCollectionIsEmpty();
+            return this.Head.Value;
         }
-
         public T GetLast()
         {
-            throw new NotImplementedException();
+            this.IfCollectionIsEmpty();
+            return this.Tail.Value;
         }
 
         public T RemoveFirst()
         {
-            throw new NotImplementedException();
+            this.IfCollectionIsEmpty();
+
+            if (Count == 1) 
+            {
+                var current = this.Head;
+                this.Head = this.Tail = null;
+                this.Count--;
+                return current.Value;
+            }
+            else
+            {
+                var current = this.Head;
+                this.Head = current.Next;
+                this.Head.Previous = null;
+                this.Count--;
+                return current.Value;
+            }
         }
 
         public T RemoveLast()
         {
-            throw new NotImplementedException();
+            this.IfCollectionIsEmpty();
+
+            if (Count == 1)
+            {
+                var current = this.Tail;
+                this.Head = this.Tail = null;
+                this.Count--;
+                return current.Value;
+            }
+            else
+            {
+                var current = this.Tail;
+                this.Tail = current.Previous;
+                this.Tail.Next = null;
+                this.Count--;
+                return current.Value;
+            }
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            var current = this.Head;
+            while (current != null)
+            {
+                yield return current.Value;
+                current = current.Next;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return this.GetEnumerator();
+        }
+
+        private void IfCollectionIsEmpty()
+        {
+            if (Count == 0)
+            {
+                throw new InvalidOperationException("List is empty!");
+            }
         }
     }
 }

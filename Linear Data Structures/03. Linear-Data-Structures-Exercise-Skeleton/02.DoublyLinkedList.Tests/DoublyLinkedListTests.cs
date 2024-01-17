@@ -38,7 +38,8 @@ namespace Problem02.DoublyLinkedList.Tests
             }
 
             Assert.AreEqual(expected.Length, this.list.Count);
-            CollectionAssert.AreEqual(expected.Reverse(), this.list);
+            var reversed = expected.Reverse();
+            CollectionAssert.AreEqual(reversed, this.list);
         }
 
         [Test]
